@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>config.properties</value>
+        </property>
+    </bean>
+
+    <bean id="userIdProvider" class="com.rightster.techtalk.demo.service.RandomUserIdProvider">
+        <constructor-arg name="prefix" value="${techtalk.demo.userIdGenerator.prefix}" />
+    </bean>
+
+    <bean id="userService" class="com.rightster.techtalk.demo.service.MemoryUserService">
+        <constructor-arg name="userIdProvider" ref="userIdProvider" />
+    </bean>
+
+</beans>
